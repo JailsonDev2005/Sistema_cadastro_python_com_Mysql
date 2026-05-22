@@ -18,8 +18,8 @@ import bcrypt
 conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Jair2026@",
-    database="banco"
+    password="sua_senha",
+    database="seu_banco"
 )
 
 cursor = conn.cursor()
