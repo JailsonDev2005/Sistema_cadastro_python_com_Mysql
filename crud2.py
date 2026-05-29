@@ -38,9 +38,15 @@ try:
             deletar_usuario(id_usuario)
 
 
-
-
         elif escolha == 5:
+            
+            email = input("Digite seu email: ")
+            senha = input("Digite sua senha: ")
+
+            login_usuario(email, senha)
+
+
+        elif escolha == 6:
 
             print("[yellow]Saindo do sistema...[/]")
             break

@@ -18,8 +18,8 @@ import bcrypt
 conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="sua_senha",
-    database="seu_banco"
+    password="Jair2026@",
+    database="banco"
 )
 
 cursor = conn.cursor()
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     nome VARCHAR(100) NOT NULL,
     idade INT NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    senha VARCHAR(100) NOT NULL
+    senha VARCHAR(255) NOT NULL
 )
 """)
 
@@ -70,7 +70,8 @@ def menu():
     conteudo += "\n2. Ler cadastro"
     conteudo += "\n3. Atualizar cadastro"
     conteudo += "\n4. Deletar cadastro"
-    conteudo += "\n5. Sair"
+    conteudo += "\n5. Login"
+    conteudo += "\n6. Sair"
     menu = Panel(conteudo, title="Sistema Cadastro", width=28, expand=False)
     print(menu)
 
@@ -168,6 +169,33 @@ def ler_inteiro(msg):
         except ValueError:
             print("[red]Digite apenas números[/]")
 
+#LOGIN DO USUARIO
+def login_usuario(email, senha):
+
+    cursor.execute(
+        "SELECT nome, senha FROM usuarios WHERE email = %s",
+        (email,)
+    )
+
+    usuario = cursor.fetchone()
+
+    if usuario is None:
+        print("[red]Email não encontrado[/]")
+        return
+
+    nome_usuario = usuario[0]
+    senha_banco = usuario[1]
+
+    senha_correta = bcrypt.checkpw(
+        senha.encode('utf-8'),
+        senha_banco.encode('utf-8')
+    )
+
+    if senha_correta:
+        print(f"[green]Login realizado com sucesso! Bem-vindo {nome_usuario}[/]")
+
+    else:
+        print("[red]Senha incorreta![/]")
 
 #FECHA A CONEXÃO COM O BANCO DE DADOS
 def fechar_conexao():
