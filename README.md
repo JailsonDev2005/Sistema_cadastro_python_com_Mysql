@@ -10,6 +10,7 @@ O projeto simula um sistema CRUD completo com foco em organização, validação
 - Exclusão de usuários
 - Validação de email (somente Gmail)
 - Senhas criptografadas com bcrypt
+- Sistema de login
 
 🧠 Objetivo do projeto
 Este projeto foi criado para praticar:
